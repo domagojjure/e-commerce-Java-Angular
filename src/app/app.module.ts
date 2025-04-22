@@ -17,20 +17,20 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
-import myAppConfig from './config/my-app-config';
-import OktaAuth from '@okta/okta-auth-js';
-import {
-  OktaAuthModule,
-  OktaCallbackComponent,
-  OKTA_CONFIG 
-} from '@okta/okta-angular';
 
-const oktaConfig = myAppConfig.oidc;
+import { RegisterComponent } from './components/register/register.component';
+import { NewProductComponent } from './components/new-product/new-product.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NewCategoryDialogComponent } from './components/new-category-dialog/new-category-dialog.component';
 
-const oktaAuth = new OktaAuth(oktaConfig);
+
+
 
 const routes: Routes = [
+  {path: 'new-product', component: NewProductComponent},
   {path: 'checkout', component: CheckoutComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'cart-details', component: CartDetailsComponent},
   {path: 'products/:id', component: ProductDetailsComponent},
   {path: 'search/:keyword', component: ProductListComponent},
@@ -54,6 +54,10 @@ const routes: Routes = [
     CheckoutComponent,
     LoginComponent,
     LoginStatusComponent,
+    RegisterComponent,
+    NewCategoryDialogComponent,
+    NewProductComponent,
+    
   ],
   imports: [ // određuje koje vanjske module ovaj modul zahtjeva
     BrowserModule,
@@ -62,9 +66,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgbModule,
     ReactiveFormsModule,
-    OktaAuthModule,
+    MatDialogModule
   ],
-  providers: [ProductService], // registracija servisa koji su dostupni za dependancy injection
+  providers: [ProductService], // kreira jednu instancu ovog/ovih serivsa i napravi ju dostupnom
   bootstrap: [AppComponent] // specificira koja je korijenska komponenta koju angular treba initat kad aplikacija starta
 })
 export class AppModule { }

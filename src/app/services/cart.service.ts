@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { CartItem } from '../common/cart-item';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Product } from '../common/product';
@@ -6,14 +6,21 @@ import { Product } from '../common/product';
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
-
+export class CartService  {
+  private storageKey = 'cartItems';
   cartItems: CartItem[] = [];
 
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
-  constructor() { }
+  constructor() { 
+    const storedItems = localStorage.getItem(this.storageKey);
+    this.cartItems = storedItems ? JSON.parse(storedItems) : [];
+    this.computeCartTotals()
+    
+  }
+
+
 
   addToCart(theCartItem: CartItem) {
 
@@ -33,6 +40,7 @@ export class CartService {
     else {
       this.cartItems.push(theCartItem);
     }
+    this.saveCart();
 
     this.computeCartTotals();
   }
@@ -66,6 +74,10 @@ export class CartService {
     console.log('----');
   }
 
+  private saveCart() {
+    localStorage.setItem(this.storageKey, JSON.stringify(this.cartItems));
+  }
+
   decrementQuantity(theCartItem: CartItem) {
 
     theCartItem.quantity--;
@@ -86,6 +98,7 @@ export class CartService {
       this.cartItems.splice(itemIndex, 1);
 
       this.computeCartTotals();
+      this.saveCart();
     }
   }
 }

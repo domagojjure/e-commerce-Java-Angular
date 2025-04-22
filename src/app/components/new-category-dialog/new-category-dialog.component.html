@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>New Category</h1>
+<div mat-dialog-content>
+    <p></p>
+</div>
+<div class="form-area">
+    <form [formGroup]="newCategoryForm">
+        <label for="textInput">Category Name</label>
+        <input type="text" id="textInput" formControlName="categoryName" class="form-control" />
+        <div class="d-flex gap-3">
+            <button class="btn btn-primary mt-2" (click)="onSubmit()">Create</button>
+            <button class="btn btn-danger mt-2" (click)="closeDialog()">Close</button>
+        </div>
+      </form>
+</div>
+

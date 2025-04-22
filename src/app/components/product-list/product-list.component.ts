@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductCategory } from '../../common/product-category';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../common/cart-item';
+import { AuthService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-product-list',
@@ -17,20 +18,25 @@ export class ProductListComponent implements OnInit {
   currentCategoryId: number = 1 //| null = null;
   previousCategoryId: number = 1;
   currentCategoryName: string = "";
+  // napraviti current category id i prenijeti u iducu komponentu koja se otvara 
   searchMode: boolean = false;
   thePageNumber: number = 1;
   thePageSize: number = 5;
   theTotalElements: number = 0;
-
+  role: string | null = ''; 
   previousKeyword: string = "";
 
   
   
-  constructor(private productService: ProductService, private cartService: CartService, private route: ActivatedRoute) {
+  constructor(private productService: ProductService, private cartService: CartService, private route: ActivatedRoute, private auth: AuthService) {
     
   }
 
   ngOnInit(): void {
+    this.auth.role$.subscribe(role => {
+      this.role = role;
+    });
+
     this.route.paramMap.subscribe(
       ()=> {
         this.listProducts();

@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { OktaAuthStateService, OKTA_AUTH } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
+import { AuthService } from '../../services/auth-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-status',
@@ -12,38 +14,36 @@ export class LoginStatusComponent implements OnInit {
 
   isAuthenticated: boolean = false;
   userFullName: string = '';
+  role: string = '';
 
-  constructor(private oktaAuthService: OktaAuthStateService,
-    @Inject(OKTA_AUTH) private oktaAuth: OktaAuth) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isAuthenticated = this.authService.isLoggedIn();
 
-    // Subscribe to authentication state changes
-    this.oktaAuthService.authState$.subscribe(
-      (result) => {
-        this.isAuthenticated = result.isAuthenticated!;
-        this.getUserDetails();
-      }
-    );
+    this.authService.authStatus$.subscribe(status => {
+      this.isAuthenticated = status;
+      
+    });
+    
+    this.authService.userName$.subscribe(username => {
+      if (username) {
+        this.userFullName = username;
+      } 
+    });
+
+    this.authService.role$.subscribe(role => {
+      if (role) {
+        this.role = role;
+      } 
+    });
+    
   }
   
-  getUserDetails() {
-    if (this.isAuthenticated) {
-
-      // Fetch the logged in user details (user's claims)
-      //
-      // user full name is exposed as a property name
-      this.oktaAuth.getUser().then(
-        (res) => {
-          this.userFullName = res.name as string;
-        }
-      );
-    }
-  }
-
-  logout() {
-    // Terminates the session with Okta and removes current tokens.
-    this.oktaAuth.signOut();
+  logout(): void {
+    this.authService.logout();
+    this.isAuthenticated = false;
+    this.router.navigate(['/products']);
   }
 
 }

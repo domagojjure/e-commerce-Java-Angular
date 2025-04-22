@@ -7,7 +7,12 @@
                 <a routerLink="/category/{{ tempProductCategory.id }}" routerLinkActive="active-link">
                     {{ tempProductCategory.categoryName }}
                 </a>
-                
+            </li>
+
+            <li *ngIf="role === 'ROLE_ADMIN'">
+                <div *ngIf="role === 'ROLE_ADMIN'">
+                    <button class="btn btn-primary btn-md" (click)="openDialog()">+ Add New Category</button>
+                </div>
             </li>
 
         </ul>
