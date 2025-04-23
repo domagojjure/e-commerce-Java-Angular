@@ -1,15 +1,15 @@
 export class NewProduct {
     constructor(
-        name: string,
-        description: string,
-        sku: string,
-        unit_price: number,       
-        imageUrl: string,
-        categoryId: number,       
-        active: boolean,
-        unitsInStock: number,
-        dateCreated: Date,
-        lastUpdated: Date,
+        public name: string,
+        public description: string,
+        public sku: string,
+        public unitPrice: number,
+        public imageUrl: string,
+        public categoryId: number,
+        public active: boolean,
+        public unitsInStock: number,
+        public dateCreated: Date,
+        public lastUpdated: Date
     ){
 
     }

@@ -18,12 +18,12 @@ export class NewProductComponent implements OnInit{
 
   ngOnInit(): void {
     this.newProductFormGroup = this.formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      sku: ['', Validators.required],
-      unit_price: [0, [Validators.required, Validators.min(0)]],
-      imageUrl: ['', Validators.required],
-      categoryId: [null, Validators.required],
+      name: ['', [Validators.required, ShopValidators.notOnlyWhitespace]],
+      description: ['', [Validators.required, ShopValidators.notOnlyWhitespace]],
+      sku: ['', [Validators.required, ShopValidators.notOnlyWhitespace]],
+      unitPrice: [0, [Validators.required, Validators.min(0)]],
+      imageUrl: ['', [Validators.required, ShopValidators.notOnlyWhitespace]],
+      categoryId: [null, [Validators.required, ShopValidators.notOnlyWhitespace]],
       active: [false],  
       unitsInStock: [0, [Validators.required, Validators.min(0)]],
     });
@@ -44,7 +44,7 @@ export class NewProductComponent implements OnInit{
         formValues.name,
         formValues.description,
         formValues.sku,
-        formValues.unit_price,
+        formValues.unitPrice,
         formValues.imageUrl,
         formValues.categoryId,
         formValues.active,
@@ -67,5 +67,13 @@ export class NewProductComponent implements OnInit{
       );
     }
 
+    get name() { return this.newProductFormGroup.get('name'); }
+    get description() { return this.newProductFormGroup.get('description'); }
+    get sku() { return this.newProductFormGroup.get('sku'); }
+    get unitPrice() { return this.newProductFormGroup.get('unitPrice'); }
+    get imageUrl() { return this.newProductFormGroup.get('imageUrl'); }
+    get categoryId() { return this.newProductFormGroup.get('categoryId'); }
+    get active() { return this.newProductFormGroup.get('active'); }
+    get unitsInStock() { return this.newProductFormGroup.get('unitsInStock'); }
 
 }

@@ -5,19 +5,19 @@
             <form [formGroup]="newProductFormGroup" (ngSubmit)="onSubmit()">
 
                 <div class="row">
-                    <div class="col-md-2"> <label>First Name</label></div>
+                    <div class="col-md-2"> <label>Name</label></div>
                     <div class="col-md-9">
                         <div class="input-space">
                             <input formControlName="name" type="text">
 
-                            <div *ngIf="name?.invalid && (name?.dirty || firstName?.touched)" class="alert alert-danger mt-1">
+                            <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger mt-1">
 
-                                <div *ngIf="firstName?.errors?.['required'] || firstName?.errors?.['notOnlyWhitespace']">
-                                    First Name is required
+                                <div *ngIf="name?.errors?.['required'] || name?.errors?.['notOnlyWhitespace']">
+                                     Name is required
                                 </div>
 
-                                <div *ngIf="firstName?.errors?.['minlength']">
-                                    First Name must be at least 2 characters long
+                                <div *ngIf="name?.errors?.['minlength']">
+                                     Name must be at least 2 characters long
                                 </div>
 
                             </div>
@@ -26,28 +26,139 @@
                 </div>
 
 
-                <label>Description:</label>
-                <textarea formControlName="description"></textarea>
+                <div class="row">
+                    <div class="col-md-2"> <label>Description</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input formControlName="description" type="text">
+
+                            <div *ngIf="description?.invalid && (description?.dirty || description?.touched)" class="alert alert-danger mt-1">
+
+                                <div *ngIf="description?.errors?.['required'] || description?.errors?.['notOnlyWhitespace']">
+                                    Description is required
+                                </div>
+
+                                <div *ngIf="name?.errors?.['minlength']">
+                                    Description must be at least 2 characters long
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
               
-                <label>SKU:</label>
-                <input type="text" formControlName="sku">
+                <div class="row">
+                    <div class="col-md-2"> <label>SKU</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input formControlName="sku" type="text">
+
+                            <div *ngIf="sku?.invalid && (sku?.dirty || sku?.touched)" class="alert alert-danger mt-1">
+
+                                <div *ngIf="sku?.errors?.['required'] || sku?.errors?.['notOnlyWhitespace']">
+                                    Sku is required
+                                </div>
+
+                                <div *ngIf="name?.errors?.['minlength']">
+                                    Sku must be at least 2 characters long
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
               
-                <label>Unit Price:</label>
-                <input type="number" formControlName="unit_price">
+                <div class="row">
+                    <div class="col-md-2"> <label>Unit Price</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input formControlName="unitPrice" type="text">
+
+                            <div *ngIf="unitPrice?.invalid && (unitPrice?.dirty || unitPrice?.touched)" class="alert alert-danger mt-1">
+
+                                <div *ngIf="unitPrice?.errors?.['required'] || unitPrice?.errors?.['notOnlyWhitespace']">
+                                    Unit Price is required
+                                </div>
+
+                                <div *ngIf="unitPrice?.errors?.['minlength']">
+                                    Unit Price must be at least 2 characters long
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
               
-                <label>Image URL:</label>
-                <input type="text" formControlName="imageUrl">
+                <div class="row">
+                    <div class="col-md-2"> <label>Image URL</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input formControlName="imageUrl" type="text">
+
+                            <div *ngIf="imageUrl?.invalid && (imageUrl?.dirty || imageUrl?.touched)" class="alert alert-danger mt-1">
+
+                                <div *ngIf="imageUrl?.errors?.['required'] || imageUrl?.errors?.['notOnlyWhitespace']">
+                                    Image URL is required
+                                </div>
+
+                                <div *ngIf="imageUrl?.errors?.['minlength']">
+                                    Image URL must be at least 2 characters long
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
               
-                <label>Category ID:</label>
-                <input type="number" formControlName="categoryId">
+                <div class="row">
+                    <div class="col-md-2"> <label>Category ID</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input formControlName="categoryId" type="text">
+
+                            <div *ngIf="categoryId?.invalid && (categoryId?.dirty || categoryId?.touched)" class="alert alert-danger mt-1">
+
+                                <div *ngIf="categoryId?.errors?.['required'] || categoryId?.errors?.['notOnlyWhitespace']">
+                                    Category ID is required
+                                </div>
+
+                                <div *ngIf="categoryId?.errors?.['minlength']">
+                                    Category ID must be at least 2 characters long
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
               
-                <label>
-                  <input type="checkbox" formControlName="active">
-                  Active
-                </label>
+                <div class="row">
+                    <div class="col-md-2"> <label>Active</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input type="checkbox" formControlName="active">
+                            <div *ngIf="active?.invalid && (active?.dirty || active?.touched)" class="alert alert-danger mt-1">
+                                <div *ngIf="active?.errors?.['required']">
+                                    Category ID is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
               
-                <label>Units in Stock:</label>
-                <input type="number" formControlName="unitsInStock">
+                <div class="row">
+                    <div class="col-md-2"> <label>Units in Stock</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input formControlName="unitsInStock" type="text">
+
+                            <div *ngIf="unitsInStock?.invalid && (unitsInStock?.dirty || unitsInStock?.touched)" class="alert alert-danger mt-1">
+
+                                <div *ngIf="unitsInStock?.errors?.['required'] || unitsInStock?.errors?.['notOnlyWhitespace']">
+                                    Units in Stock is a required value
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             
               
                 <button type="submit" class="btn btn-success">Submit</button>
